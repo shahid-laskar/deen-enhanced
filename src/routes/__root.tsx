@@ -1,4 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Sidebar } from "../components/layout/Sidebar";
+import { BottomNav } from "../components/layout/BottomNav";
+import { MobileHeader } from "../components/layout/MobileHeader";
 
 import appCss from "../styles.css?url";
 
@@ -29,20 +32,18 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Deen — Your Islamic Companion" },
+      { name: "description", content: "All-in-one Islamic lifestyle app with prayer times, Quran, dhikr, habits, and more." },
+      { name: "author", content: "Deen App" },
+      { property: "og:title", content: "Deen — Your Islamic Companion" },
+      { property: "og:description", content: "All-in-one Islamic lifestyle app with prayer times, Quran, dhikr, habits, and more." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -65,5 +66,16 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <div className="flex min-h-screen w-full bg-background">
+      <Sidebar />
+      <div className="flex-1 flex flex-col min-h-screen">
+        <MobileHeader />
+        <main className="flex-1 overflow-y-auto pb-20 md:pb-0">
+          <Outlet />
+        </main>
+        <BottomNav />
+      </div>
+    </div>
+  );
 }
