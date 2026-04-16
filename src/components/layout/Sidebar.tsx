@@ -31,13 +31,14 @@ const navItems = [
 function GeometricPattern() {
   return (
     <svg
-      className="absolute inset-0 h-full w-full opacity-[0.04]"
+      className="absolute inset-0 h-full w-full opacity-[0.03]"
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        <pattern id="sidebar-geo" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M20 0L40 20L20 40L0 20Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
-          <circle cx="20" cy="20" r="5" fill="none" stroke="currentColor" strokeWidth="0.3" />
+        <pattern id="sidebar-geo" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
+          <path d="M24 0L48 24L24 48L0 24Z" fill="none" stroke="currentColor" strokeWidth="0.4" />
+          <circle cx="24" cy="24" r="6" fill="none" stroke="currentColor" strokeWidth="0.25" />
+          <circle cx="24" cy="24" r="2" fill="currentColor" opacity="0.1" />
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#sidebar-geo)" />
@@ -56,41 +57,44 @@ export function Sidebar() {
 
   return (
     <aside
-      className={`hidden md:flex flex-col h-screen bg-sidebar border-r border-sidebar-border relative transition-all duration-300 ${collapsed ? "w-[4.5rem]" : "w-64"}`}
+      className={`hidden md:flex flex-col h-screen bg-sidebar border-r border-sidebar-border/60 relative transition-all duration-300 ease-out ${collapsed ? "w-[4.5rem]" : "w-64"}`}
     >
       <GeometricPattern />
 
       {/* Logo */}
-      <div className="relative z-10 flex items-center gap-3 px-5 py-6 border-b border-sidebar-border">
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+      <div className="relative z-10 flex items-center gap-3 px-5 py-6 border-b border-sidebar-border/40">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-sm">
           <span className="font-amiri text-lg font-bold">د</span>
         </div>
         {!collapsed && (
           <div className="overflow-hidden">
-            <h1 className="text-lg font-semibold tracking-tight text-sidebar-foreground">Deen</h1>
-            <p className="text-[10px] uppercase tracking-widest text-muted-foreground">Your Islamic Companion</p>
+            <h1 className="text-lg font-bold tracking-tight text-sidebar-foreground">Deen</h1>
+            <p className="text-[9px] uppercase tracking-[0.2em] text-muted-foreground font-semibold">Your Islamic Companion</p>
           </div>
         )}
       </div>
 
       {/* Nav */}
-      <nav className="relative z-10 flex-1 overflow-y-auto px-3 py-4 space-y-1">
+      <nav className="relative z-10 flex-1 overflow-y-auto px-3 py-4 space-y-0.5">
         {navItems.map((item) => {
           const isActive = location.pathname === item.to;
           return (
             <Link
               key={item.to}
               to={item.to}
-              className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 group ${
+              className={`relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 group ${
                 isActive
-                  ? "bg-primary/10 text-primary"
-                  : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                  ? "bg-primary/10 text-primary shadow-sm"
+                  : "text-sidebar-foreground/65 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground"
               }`}
             >
-              <item.icon className={`h-[18px] w-[18px] shrink-0 ${isActive ? "text-primary" : ""}`} />
-              {!collapsed && <span>{item.title}</span>}
+              {isActive && (
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full bg-primary" />
+              )}
+              <item.icon className={`h-[18px] w-[18px] shrink-0 transition-transform duration-200 group-hover:scale-105 ${isActive ? "text-primary" : ""}`} strokeWidth={isActive ? 2.2 : 1.8} />
+              {!collapsed && <span className="truncate">{item.title}</span>}
               {isActive && !collapsed && (
-                <div className="ml-auto h-1.5 w-1.5 rounded-full bg-primary" />
+                <div className="ml-auto h-1.5 w-1.5 rounded-full bg-primary shadow-glow-primary" />
               )}
             </Link>
           );
@@ -98,17 +102,19 @@ export function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="relative z-10 border-t border-sidebar-border px-3 py-3 space-y-2">
+      <div className="relative z-10 border-t border-sidebar-border/40 px-3 py-3 space-y-1">
         <button
           onClick={() => setDarkMode(!darkMode)}
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-sidebar-foreground/60 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground transition-all duration-200"
         >
-          {darkMode ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
+          <div className="relative">
+            {darkMode ? <Sun className="h-[18px] w-[18px] transition-transform duration-300 rotate-0" /> : <Moon className="h-[18px] w-[18px] transition-transform duration-300" />}
+          </div>
           {!collapsed && <span>{darkMode ? "Light Mode" : "Dark Mode"}</span>}
         </button>
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-sidebar-foreground/70 hover:bg-sidebar-accent transition-colors"
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-sidebar-foreground/60 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground transition-all duration-200"
         >
           {collapsed ? <ChevronRight className="h-[18px] w-[18px]" /> : <ChevronLeft className="h-[18px] w-[18px]" />}
           {!collapsed && <span>Collapse</span>}
