@@ -2,12 +2,13 @@ import { format } from "date-fns";
 
 function GeometricDivider() {
   return (
-    <svg className="w-32 h-3 text-primary/30 my-2" viewBox="0 0 128 12">
-      <line x1="0" y1="6" x2="48" y2="6" stroke="currentColor" strokeWidth="0.5" />
-      <polygon points="56,0 64,6 56,12 48,6" fill="none" stroke="currentColor" strokeWidth="0.7" />
-      <polygon points="64,2 70,6 64,10 58,6" fill="currentColor" opacity="0.3" />
-      <polygon points="72,0 80,6 72,12 64,6" fill="none" stroke="currentColor" strokeWidth="0.7" />
-      <line x1="80" y1="6" x2="128" y2="6" stroke="currentColor" strokeWidth="0.5" />
+    <svg className="w-40 h-4 text-primary/25 my-2" viewBox="0 0 160 16">
+      <line x1="0" y1="8" x2="56" y2="8" stroke="currentColor" strokeWidth="0.5" />
+      <polygon points="64,1 72,8 64,15 56,8" fill="none" stroke="currentColor" strokeWidth="0.7" />
+      <polygon points="72,3 78,8 72,13 66,8" fill="currentColor" opacity="0.25" />
+      <polygon points="80,1 88,8 80,15 72,8" fill="none" stroke="currentColor" strokeWidth="0.7" />
+      <polygon points="96,1 104,8 96,15 88,8" fill="none" stroke="currentColor" strokeWidth="0.5" />
+      <line x1="104" y1="8" x2="160" y2="8" stroke="currentColor" strokeWidth="0.5" />
     </svg>
   );
 }
@@ -27,12 +28,16 @@ export function IslamicHeader() {
   const gregorian = format(today, "EEEE, MMMM d, yyyy");
 
   return (
-    <div className="text-center md:text-left space-y-1">
-      <p className="text-sm text-muted-foreground tracking-wide">{gregorian}</p>
-      <h2 className="text-2xl md:text-3xl font-semibold text-foreground">
-        {greeting} 🤲
+    <div className="text-center md:text-left space-y-2 animate-slide-up stagger-1">
+      <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
+        <p className="text-sm text-muted-foreground tracking-wide font-medium">{gregorian}</p>
+        <span className="hidden md:inline text-muted-foreground/30">•</span>
+        <p className="text-xs text-muted-foreground/60 font-amiri tracking-wide">٢٣ رمضان ١٤٤٧</p>
+      </div>
+      <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+        {greeting} <span className="inline-block animate-[wave_1.5s_ease-in-out_infinite]">🤲</span>
       </h2>
-      <p className="font-amiri text-lg text-primary/80">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+      <p className="font-amiri text-xl text-primary/70 leading-relaxed">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
       <GeometricDivider />
     </div>
   );

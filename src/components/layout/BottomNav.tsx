@@ -13,24 +13,27 @@ export function BottomNav() {
   const location = useLocation();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-card/95 backdrop-blur-lg md:hidden">
-      <div className="flex items-center justify-around px-2 py-1.5">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border/40 glass-card md:hidden safe-area-bottom">
+      <div className="flex items-center justify-around px-2 py-2">
         {tabs.map((tab) => {
           const isActive = location.pathname === tab.to;
           return (
             <Link
               key={tab.to}
               to={tab.to}
-              className={`flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-all ${
+              className={`relative flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-2xl transition-all duration-300 ${
                 isActive
                   ? "text-primary"
                   : "text-muted-foreground"
               }`}
             >
-              <div className={`p-1 rounded-lg transition-all ${isActive ? "bg-primary/10" : ""}`}>
-                <tab.icon className="h-5 w-5" />
+              <div className={`relative p-1.5 rounded-xl transition-all duration-300 ${isActive ? "bg-primary/12 scale-110" : "hover:bg-muted/40"}`}>
+                <tab.icon className="h-5 w-5" strokeWidth={isActive ? 2.2 : 1.8} />
+                {isActive && (
+                  <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-primary" />
+                )}
               </div>
-              <span className="text-[10px] font-medium">{tab.title}</span>
+              <span className={`text-[10px] font-semibold transition-all ${isActive ? "text-primary" : ""}`}>{tab.title}</span>
             </Link>
           );
         })}

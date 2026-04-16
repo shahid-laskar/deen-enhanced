@@ -11,7 +11,7 @@ export const Route = createFileRoute("/")({
 
 function Dashboard() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-6 md:px-8 md:py-8 space-y-6">
+    <div className="mx-auto max-w-4xl px-4 py-6 md:px-8 md:py-10 space-y-8">
       <IslamicHeader />
       <PrayerHero />
       <div className="grid gap-6 md:grid-cols-2">
