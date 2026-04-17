@@ -108,12 +108,15 @@ function QiblaPage() {
               </g>
 
               {/* Center medallion */}
-              <circle cx="200" cy="200" r="40" fill="var(--color-card)" className="shadow-elevated" />
-              <circle cx="200" cy="200" r="38" fill="none" stroke="var(--color-primary)" strokeWidth="2" />
-              <text x="200" y="208" textAnchor="middle" className="fill-primary font-amiri" style={{ fontSize: "28px", fontWeight: "bold" }}>
-                ﷽
-              </text>
+              <circle cx="200" cy="200" r="42" fill="var(--color-card)" />
+              <circle cx="200" cy="200" r="40" fill="none" stroke="var(--color-primary)" strokeWidth="2" />
+              <circle cx="200" cy="200" r="5" fill="var(--color-primary)" />
             </svg>
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-card border border-primary/30 shadow-elevated">
+                <span className="font-amiri text-3xl font-bold text-primary leading-none">﷽</span>
+              </div>
+            </div>
           </div>
 
           <div className="mt-8 text-center">
