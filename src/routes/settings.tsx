@@ -11,7 +11,14 @@ export const Route = createFileRoute("/settings")({
   component: SettingsPage,
 });
 
-const sections = [
+type SettingItem = {
+  icon: typeof User;
+  label: string;
+  value?: string;
+  toggle?: boolean;
+};
+
+const sections: { title: string; items: SettingItem[] }[] = [
   {
     title: "Preferences",
     items: [
