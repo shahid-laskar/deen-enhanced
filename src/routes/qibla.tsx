@@ -113,8 +113,8 @@ function QiblaPage() {
               <circle cx="200" cy="200" r="5" fill="var(--color-primary)" />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-card border border-primary/30 shadow-elevated">
-                <span className="font-amiri text-3xl font-bold text-primary leading-none">﷽</span>
+              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-foreground to-foreground/85 border-4 border-card shadow-elevated">
+                <div className="h-10 w-10 rounded-md bg-gradient-to-br from-gold to-gold/70 border border-gold/80 shadow-glow-gold" />
               </div>
             </div>
           </div>
